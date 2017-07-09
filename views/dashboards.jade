@@ -1,0 +1,132 @@
+extends layout
+
+block content
+
+  style(type="text/css").
+    
+    body{
+      background: rgba(236, 239, 241, 0.31)
+    }
+
+    #lista_prestacoes{
+      font-size:14px;
+      font-family: Calibri;
+    }
+
+    #lista_prestacoes tr:hover{
+      cursor:pointer;
+    }
+
+    #div_menu_sidebar{
+      width:18%;
+      min-height:200px;
+      float:left;
+      border:1px solid;
+      box-shadow:1px 1px 1px;
+      border-radius:3px;
+      background:rgba(74, 91, 185, 0.11);
+      padding:7px;
+    }
+
+    #div_menu_sidebar a{
+      display:block;
+      text-decoration:none;
+    }
+
+    #div_menu_sidebar a:hover{
+      cursor:pointer;
+      border-bottom:1px solid;
+      background:steelblue;
+      color:white;
+    }
+
+    #div_container{
+      width:80%;
+      height:560px;
+      float:right;
+      overflow:auto;
+    }
+
+  
+  script(type="text/javascript").
+  
+    $(document).ready(function(){
+        
+      setInterval(function(){
+        
+        
+      }, 1000);
+
+      Highcharts.chart('dashboard01', {
+        chart: {
+            type: 'areaspline'
+        },
+        title: {
+            text: 'Consultas da semana'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 150,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday'
+            ],
+            //- plotBands: [{ // visualize the weekend
+            //-     from: 4.5,
+            //-     to: 6.5,
+            //-     color: 'rgba(68, 170, 213, .2)'
+            //- }]
+        },
+        yAxis: {
+            title: {
+                text: 'Total de Consultas'
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+            name: 'John',
+            data: [3, 4, 3, 5, 4, 10, 12]
+        }]
+      })
+
+    })
+
+  div(id='app')
+    nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#') 
+            span(style="padding:5px 20px;border-radius:3px;background:#424242") Hacka IMA
+        form.navbar-form.navbar-left
+          .form-group
+            input.form-control(type='text', placeholder='Search' id="text_search")
+          button.btn.btn-default(type='submit') Pesquisar
+    div(id='div_menu_sidebar')
+      a(href='atendimentos') Consultas Previstas
+      a(href='dashboards') Dashboards
+    div(id='div_container')
+      div(id="dashboard01" style="min-width: 310px; height: 400px; margin: 0 auto")
